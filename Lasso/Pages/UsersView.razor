@@ -1,0 +1,41 @@
+﻿@page "/usersview"
+@using System.Net.Http 
+@using Blazorise.DataGrid
+@using Models 
+@inject HttpClient Http
+
+<h3>Users Grid View</h3>
+
+<DataGrid TItem="User" Data="@users">
+    <DataGridColumn TItem="User" Field="@nameof(User.Id)" Caption="ID"></DataGridColumn>
+    <DataGridColumn TItem="User" Field="@nameof(User.Name)" Caption="Name"></DataGridColumn>
+    <DataGridColumn TItem="User" Field="@nameof(User.Image)" Caption="Image"></DataGridColumn>
+</DataGrid>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Name</td>
+            <td>Id</td>
+            <td>Image</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Id</td>
+                <td><img src="@user.Image" /></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button @onclick="AddUserAsync">Add User</button>
+
+
+@code {
+    
+
+}
