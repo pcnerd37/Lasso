@@ -3,6 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 namespace Lasso
 {
@@ -14,8 +17,13 @@ namespace Lasso
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddBlazorise(options =>
+            {
+                options.ChangeTextOnKeyPress = true;
+            }).AddBootstrapProviders().AddFontAwesomeIcons();
 
             //builder.Services.AddHttpClient<IUsersService, UsersService>(x => x.BaseAddress = new Uri("http://localhost:8090"));
+            
 
             await builder.Build().RunAsync();
         }
